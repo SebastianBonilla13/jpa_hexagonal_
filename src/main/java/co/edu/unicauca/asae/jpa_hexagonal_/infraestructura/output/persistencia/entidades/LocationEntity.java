@@ -7,12 +7,12 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "curso")
-public class CourseEntity {
+@Table(name = "espacio_fisico")
+public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,19 +20,19 @@ public class CourseEntity {
     @Column(name = "nombre", length = 100, nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "asignatura_id", nullable = false)
-    private SubjectEntity subject;
+    @Column(name = "capacidad")
+    private Integer capacity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "location")
     private List<TimeSlotEntity> timeSlots;
 
     @Override
     public String toString() {
-        return "CourseEntity{" +
+        return "LocationEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", subject=" + (subject != null ? subject.getName() : "null") +
+                ", capacity=" + capacity +
+                ", timeSlotsCount=" + (timeSlots != null ? timeSlots.size() : 0) +
                 '}';
     }
 }

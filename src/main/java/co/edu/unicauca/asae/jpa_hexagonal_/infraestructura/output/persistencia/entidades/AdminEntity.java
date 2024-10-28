@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos;
+package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,21 +9,18 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Data
 @Getter
 @Setter
-@ToString
 @Table(name = "administrativo")
-public class Administrator extends Person {
-
+public class AdminEntity extends PersonEntity {
     @Column(name = "rol", length = 255, nullable = false)
     private String rol;
 
-    public Administrator() {
+    public AdminEntity() {
         super();
     }
 
-    public Administrator(String name, String lastname, String email, String rol) {
+    public AdminEntity(String name, String lastname, String email, String rol) {
         super(name, lastname, email);
         this.rol = rol;
     }
@@ -37,5 +34,4 @@ public class Administrator extends Person {
                 ", rol='" + rol + '\'' + // Propiedad específica de Administrator
                 '}';
     }
-
 }

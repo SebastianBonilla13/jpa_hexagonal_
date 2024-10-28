@@ -1,9 +1,11 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+
 
 @Entity
 @Data
@@ -11,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "curso")
-public class CourseEntity {
+@Table(name = "asignatura")
+public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,19 +22,18 @@ public class CourseEntity {
     @Column(name = "nombre", length = 100, nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "asignatura_id", nullable = false)
-    private SubjectEntity subject;
+    @Column(name = "codigo", length = 100, nullable = false)
+    private String code;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TimeSlotEntity> timeSlots;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    private List<CourseEntity> courses;
 
     @Override
     public String toString() {
-        return "CourseEntity{" +
+        return "SubjectEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", subject=" + (subject != null ? subject.getName() : "null") +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

@@ -12,26 +12,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
-@Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
-@Table(name = "asignatura")
 public class Subject {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "nombre", length = 100, nullable = false)
     private String name;
-
-    @Column(name = "codigo", length = 100, nullable = false)
     private String code;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Course> courses;
 
     @Override
