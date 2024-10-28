@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.modelmapper.TypeToken;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.LocationEntity;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios.LocationRepository;
 
 @Service
@@ -28,14 +30,18 @@ public class GestionarLocationGatewayImplAdapter implements GestionarLocationGat
 
     @Override
     public Location guardar(Location objLocation) {
-        // TODO Auto-generated method stub
-        return null;
+        LocationEntity objLocationEntity = this.LocationModelMapper.map(objLocation, LocationEntity.class);
+        LocationEntity ObjLocationEntityRegistrado = this.objLocationRepository.save(objLocationEntity);
+        Location objLocationRespuesta = this.LocationModelMapper.map(ObjLocationEntityRegistrado, Location.class);
+        return objLocationRespuesta;
     }
 
     @Override
     public List<Location> listar() {
-        // TODO Auto-generated method stub
-        return null;
+        Iterable<LocationEntity> lista = this.objLocationRepository.findAll();
+        List<Location> listaObtenida = this.LocationModelMapper.map(lista, new TypeToken<List<Location>>() {
+        }.getType());
+        return listaObtenida;
     }
 
 }
