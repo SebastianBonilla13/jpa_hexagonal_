@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class LocationRestController {
         return objRespuesta;
     }
 
+    @GetMapping("/locations")
     public ResponseEntity<List<LocationDTORespuesta>> listar() {
         ResponseEntity<List<LocationDTORespuesta>> objRespuesta = new ResponseEntity<List<LocationDTORespuesta>>(
                 objMapeador.mappearDeLocationsARespuesta(this.objGestionarLocateCUInt.listar()), HttpStatus.CREATED);
