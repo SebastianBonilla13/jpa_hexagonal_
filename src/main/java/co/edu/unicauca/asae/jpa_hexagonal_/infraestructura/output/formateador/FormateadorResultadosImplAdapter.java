@@ -3,19 +3,22 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.formateador;
 import org.springframework.stereotype.Service;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
 @Service
 public class FormateadorResultadosImplAdapter implements LocationFormateadorResultadosIntPort {
 
     @Override
     public void retornarRespuestaErrorEntidadExiste(String mensaje) {
-        // TODO Auto-generated method stub
-
+        EntidadYaExisteException objException = new EntidadYaExisteException(mensaje);
+        throw objException;
     }
 
     @Override
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje) {
-        // TODO Auto-generated method stub
+        ReglaNegocioExcepcion objException = new ReglaNegocioExcepcion(mensaje);
+        throw objException;
 
     }
 

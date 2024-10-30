@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.GestionarLocationCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 
 @Configuration
 public class BeanConfiguration {
@@ -19,5 +20,22 @@ public class BeanConfiguration {
 
         return Adapter;
     }
+
+    /*
+     * @Bean
+     * public Location location1() {
+     * return new Location(null, "Auditorio 1", 20, null);
+     * }
+     * 
+     * @Bean
+     * public Location location2() {
+     * return new Location(null, "Salón de Conferencias", 50, null);
+     * }
+     * 
+     * @Bean
+     * public Location location3() {
+     * return new Location(null, "Sala de Reuniones", 10, null);
+     * }
+     */
 
 }
