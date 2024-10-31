@@ -31,14 +31,15 @@ public class LocationRestController {
         Location objLocationCrear = objMapeador.mappearDePeticionALocation(objLocation); // Peticion to objLocation
         Location objLocationCreado = objGestionarLocateCUInt.crear(objLocationCrear); // crear objLocation en Dominio
         ResponseEntity<LocationDTORespuesta> objRespuesta = new ResponseEntity<LocationDTORespuesta>(
-                objMapeador.mappearDeLocationARespuesta(objLocationCreado), HttpStatus.CREATED); // Responder(objLocation_creado,HttpStatus)
+                objMapeador.mappearDeLocationARespuesta(objLocationCreado), HttpStatus.CREATED);
         return objRespuesta;
     }
 
     @GetMapping("/locations")
     public ResponseEntity<List<LocationDTORespuesta>> listar() {
         ResponseEntity<List<LocationDTORespuesta>> objRespuesta = new ResponseEntity<List<LocationDTORespuesta>>(
-                objMapeador.mappearDeLocationsARespuesta(this.objGestionarLocateCUInt.listar()), HttpStatus.CREATED);
+                objMapeador.mappearDeLocationsARespuesta(this.objGestionarLocateCUInt.listar()),
+                HttpStatus.CREATED);
         return objRespuesta;
     }
 

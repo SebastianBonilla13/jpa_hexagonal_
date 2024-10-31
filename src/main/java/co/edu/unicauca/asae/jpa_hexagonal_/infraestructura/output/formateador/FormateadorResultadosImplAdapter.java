@@ -19,7 +19,6 @@ public class FormateadorResultadosImplAdapter implements LocationFormateadorResu
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje) {
         ReglaNegocioExcepcion objException = new ReglaNegocioExcepcion(mensaje);
         throw objException;
-
     }
 
 }

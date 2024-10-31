@@ -1,5 +1,8 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.configuracion;
 
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.SubjectCUAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +22,11 @@ public class BeanConfiguration {
                 objLocationFormateadorResultados);
 
         return Adapter;
+    }
+
+    @Bean
+    public SubjectCUIntPort createSubjectCUIntPort(SubjectGatewayIntPort subjectGatewayIntPort ){
+        return new SubjectCUAdapter(subjectGatewayIntPort);
     }
 
     /*
