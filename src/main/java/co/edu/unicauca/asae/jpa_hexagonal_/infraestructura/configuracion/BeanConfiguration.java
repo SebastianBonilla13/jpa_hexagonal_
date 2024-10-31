@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.GestionarLocationCUAdapter;
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 
 @Configuration
 public class BeanConfiguration {

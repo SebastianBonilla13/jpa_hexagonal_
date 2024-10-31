@@ -26,7 +26,6 @@ public class TeacherCUAdapter implements TeacherCUIntPort {
 
     @Override
     public List<Teacher> getAllTeachers() {
-
         List<Teacher> teachers = this.teacherGateway.listAllTeachers();
         return teachers;
     }
