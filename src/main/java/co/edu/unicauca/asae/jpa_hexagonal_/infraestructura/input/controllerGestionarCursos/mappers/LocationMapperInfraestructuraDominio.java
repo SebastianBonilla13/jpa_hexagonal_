@@ -7,7 +7,9 @@ import org.mapstruct.Mapper;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTOPeticion.LocationDTOPeticion;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTORespuesta.LocationDTORespuesta;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @Mapper(componentModel = "spring")
 public interface LocationMapperInfraestructuraDominio {
 

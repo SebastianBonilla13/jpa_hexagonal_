@@ -19,8 +19,13 @@ import java.util.List;
 @RequestMapping("/api/subject")
 public class SubjectController {
 
-    private SubjectCUIntPort subjectService;
-    private SubjectDTOsMapper subjectMapper;
+    private final SubjectCUIntPort subjectService;
+    private final SubjectDTOsMapper subjectMapper;
+
+    public SubjectController(SubjectCUIntPort subjectService, SubjectDTOsMapper subjectMapper){
+        this.subjectMapper = subjectMapper;
+        this.subjectService = subjectService;
+    }
 
     @PostMapping("")
     public ResponseEntity<SubjectResponseDTO> postSubject(@RequestBody @Valid SubjectRequestDTO subjectRequest){
