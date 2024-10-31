@@ -10,7 +10,7 @@ public class SubjectCUAdapter implements SubjectCUIntPort {
 
     private final SubjectGatewayIntPort subjectGateway;
 
-    public SubjectCUAdapter(SubjectGatewayIntPort subjectGateway){
+    public SubjectCUAdapter(SubjectGatewayIntPort subjectGateway) {
         this.subjectGateway = subjectGateway;
     }
 
@@ -18,9 +18,10 @@ public class SubjectCUAdapter implements SubjectCUIntPort {
     public Subject createSubject(Subject newSubject) {
         boolean exists = subjectGateway.subjectExists(newSubject.getId());
 
-        if(exists){
+        if (exists) {
             // TODO... Manejar exepcion
         }
+
         return subjectGateway.saveSubject(newSubject);
     }
 
@@ -28,7 +29,7 @@ public class SubjectCUAdapter implements SubjectCUIntPort {
     public List<Subject> getAllSubjects() {
         List<Subject> subjects = this.subjectGateway.listAllSubjects();
 
-        if(subjects.isEmpty()){
+        if (subjects.isEmpty()) {
             // TODO... Manejar exepcion
         }
 
