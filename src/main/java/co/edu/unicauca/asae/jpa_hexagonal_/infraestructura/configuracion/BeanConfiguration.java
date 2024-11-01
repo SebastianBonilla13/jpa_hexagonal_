@@ -4,9 +4,11 @@ import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TeacherGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TimeSlotGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.CourseCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.SubjectCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TeacherCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TimeSlotCUAdapter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,13 +33,10 @@ public class BeanConfiguration {
         return Adapter;
     }
 
-    /*
-     * @Bean
-     * public SubjectCUIntPort createSubjectCUIntPort(SubjectGatewayIntPort
-     * subjectGatewayIntPort ){
-     * return new SubjectCUAdapter(subjectGatewayIntPort);
-     * }
-     */
+    @Bean
+    public TimeSlotCUAdapter createTimeSlotAdapter(TimeSlotGatewayIntPort timeSlotGatewayIntPort) {
+        return new TimeSlotCUAdapter(timeSlotGatewayIntPort);
+    }
 
     @Bean
     public SubjectCUAdapter createSubjectCUAdapter(SubjectGatewayIntPort objSubjectGateway) {

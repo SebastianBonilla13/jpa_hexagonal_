@@ -3,6 +3,8 @@ package co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
 
 import java.util.List;
 
@@ -16,12 +18,14 @@ public class CourseCUAdapter implements CourseCUIntPort {
 
     @Override
     public Course createCourse(Course newCourse) {
-        return null;
+        boolean exist = this.courseGateway.courseExistGateway(newCourse.getId());
+        if(exist) throw new EntidadYaExisteException(CodigoError.ENTIDAD_YA_EXISTE);
+        return this.courseGateway.saveCourseGateway(newCourse);
     }
 
     @Override
     public List<Course> listCourses() {
-        return null;
+        return this.courseGateway.findAllCoursesGateway();
     }
 
     @Override
