@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SubjectResponseDTO {
     private String name;
-    private String codigo;
+    private String code;
 }

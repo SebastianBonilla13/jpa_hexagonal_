@@ -28,12 +28,12 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public SubjectCUIntPort createSubjectCUIntPort(SubjectGatewayIntPort subjectGatewayIntPort ){
+    public SubjectCUAdapter createSubjectCUIntPort(SubjectGatewayIntPort subjectGatewayIntPort ){
         return new SubjectCUAdapter(subjectGatewayIntPort);
     }
 
     @Bean
-    public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort){
+    public CourseCUAdapter createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort){
         return new CourseCUAdapter(courseGatewayIntPort);
     }
 
