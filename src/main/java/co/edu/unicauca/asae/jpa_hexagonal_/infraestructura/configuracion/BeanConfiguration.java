@@ -4,8 +4,11 @@ import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TeacherGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.CourseCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.SubjectCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TeacherCUAdapter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,13 +30,28 @@ public class BeanConfiguration {
         return Adapter;
     }
 
+    /*
+     * @Bean
+     * public SubjectCUIntPort createSubjectCUIntPort(SubjectGatewayIntPort
+     * subjectGatewayIntPort ){
+     * return new SubjectCUAdapter(subjectGatewayIntPort);
+     * }
+     */
+
     @Bean
-    public SubjectCUIntPort createSubjectCUIntPort(SubjectGatewayIntPort subjectGatewayIntPort ){
-        return new SubjectCUAdapter(subjectGatewayIntPort);
+    public SubjectCUAdapter createSubjectCUAdapter(SubjectGatewayIntPort objSubjectGateway) {
+        SubjectCUAdapter AdapterSubject = new SubjectCUAdapter(objSubjectGateway);
+        return AdapterSubject;
     }
 
     @Bean
-    public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort){
+    public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway) {
+        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway);
+        return AdapterTeacher;
+    }
+
+    @Bean
+    public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort) {
         return new CourseCUAdapter(courseGatewayIntPort);
     }
 
