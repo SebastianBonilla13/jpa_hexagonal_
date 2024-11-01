@@ -14,9 +14,10 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "docente")
-public class TeacherEntity extends PersonEntity{
+public class TeacherEntity extends PersonEntity {
     @OneToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST })
-    @JoinColumn(name = "oficina_id", nullable = false)
+    @JoinColumn(name = "oficina_id")
+    /* @JoinColumn(name = "oficina_id", nullable = false) */
     private OfficeEntity office;
 
     @ManyToMany(cascade = CascadeType.ALL)

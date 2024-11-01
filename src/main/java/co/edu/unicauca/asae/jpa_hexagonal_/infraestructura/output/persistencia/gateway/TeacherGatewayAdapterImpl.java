@@ -25,6 +25,8 @@ public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
 
     @Override
     public boolean teacherExists(Integer teacherId) {
+        if (teacherId == null)
+            return false;
         Optional<TeacherEntity> optionalTeacher = teacherRepository.findById(teacherId);
         return optionalTeacher.isEmpty();
     }
