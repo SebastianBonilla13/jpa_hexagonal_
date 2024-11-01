@@ -1,7 +1,6 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.configuracion;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TeacherGatewayIntPort;
@@ -14,7 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.OfficeGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.GestionarLocationCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.OfficeCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 
 @Configuration
@@ -48,6 +49,12 @@ public class BeanConfiguration {
     public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway) {
         TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway);
         return AdapterTeacher;
+    }
+
+    @Bean
+    public OfficeCUAdapter createOfficeCUAdapter(OfficeGatewayIntPort objOfficeGateway) {
+        OfficeCUAdapter AdapterOffice = new OfficeCUAdapter(objOfficeGateway);
+        return AdapterOffice;
     }
 
     @Bean
