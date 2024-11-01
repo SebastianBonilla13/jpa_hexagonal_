@@ -39,7 +39,6 @@ public class BeanConfiguration {
      */
 
     @Bean
-<<<<<<< HEAD
     public SubjectCUAdapter createSubjectCUAdapter(SubjectGatewayIntPort objSubjectGateway) {
         SubjectCUAdapter AdapterSubject = new SubjectCUAdapter(objSubjectGateway);
         return AdapterSubject;
@@ -53,14 +52,6 @@ public class BeanConfiguration {
 
     @Bean
     public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort) {
-=======
-    public SubjectCUAdapter createSubjectCUIntPort(SubjectGatewayIntPort subjectGatewayIntPort ){
-        return new SubjectCUAdapter(subjectGatewayIntPort);
-    }
-
-    @Bean
-    public CourseCUAdapter createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort){
->>>>>>> 30db18db19d1772f418f777da45ccc52cd1e72f3
         return new CourseCUAdapter(courseGatewayIntPort);
     }
 
