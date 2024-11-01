@@ -27,7 +27,6 @@ public class SubjectController {
     @PostMapping("")
     public ResponseEntity<SubjectResponseDTO> postSubject(@RequestBody @Valid SubjectRequestDTO subjectRequest){
         Subject subject = this.subjectMapper.requestSubjectToResponseSubject(subjectRequest);
-        System.out.println(subject);
         Subject savedSubject = this.subjectService.createSubject(subject);
         SubjectResponseDTO subjectResponse = this.subjectMapper.subjectDataToResponseSubject(savedSubject);
         return new ResponseEntity<>(subjectResponse, HttpStatus.CREATED);

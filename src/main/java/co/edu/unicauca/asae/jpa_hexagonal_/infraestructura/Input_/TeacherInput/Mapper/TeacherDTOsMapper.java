@@ -7,7 +7,9 @@ import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TeacherInput.R
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 @Mapper(componentModel = "spring")
 public interface TeacherDTOsMapper {
     Teacher requestTeacherToResponseTeacher(TeacherRequestDTO requestDTO);

@@ -51,7 +51,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort) {
+    public CourseCUAdapter createCourseAdapter(CourseGatewayIntPort courseGatewayIntPort) {
         return new CourseCUAdapter(courseGatewayIntPort);
     }
 
