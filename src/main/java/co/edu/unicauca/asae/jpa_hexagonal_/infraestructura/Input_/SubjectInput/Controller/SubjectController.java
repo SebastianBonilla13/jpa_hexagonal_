@@ -2,9 +2,9 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Subject;
-import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTOPeticion.SubjectRequestDTO;
-import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTORespuesta.SubjectResponseDTO;
-import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.mappers.SubjectDTOsMapper;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.Mapper.SubjectDTOsMapper;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.RequestDTO.SubjectRequestDTO;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.ResponseDTO.SubjectResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

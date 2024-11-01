@@ -1,8 +1,8 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.Mapper;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Subject;
-import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTOPeticion.SubjectRequestDTO;
-import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.input.controllerGestionarCursos.DTORespuesta.SubjectResponseDTO;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.RequestDTO.SubjectRequestDTO;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.SubjectInput.ResponseDTO.SubjectResponseDTO;
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Configuration;
 
