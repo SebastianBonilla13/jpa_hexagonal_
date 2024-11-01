@@ -25,6 +25,7 @@ public class SubjectGatewayAdapterImpl implements SubjectGatewayIntPort {
 
     @Override
     public boolean subjectExists(Integer subjectId) {
+        if(subjectId == null) return false;
         Optional<SubjectEntity> optionalSubject = subjectRepository.findById(subjectId);
         return optionalSubject.isEmpty();
     }

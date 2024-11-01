@@ -24,6 +24,7 @@ public class CourseGatewayAdapterImpl implements CourseGatewayIntPort {
 
     @Override
     public boolean courseExistGateway(Integer courseId) {
+        if(courseId == null) return false;
         Optional<CourseEntity> course = this.courseRepository.findById(courseId);
         return course.isPresent();
     }
