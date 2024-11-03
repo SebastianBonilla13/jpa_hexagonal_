@@ -34,8 +34,9 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public TimeSlotCUAdapter createTimeSlotAdapter(TimeSlotGatewayIntPort timeSlotGatewayIntPort) {
-        return new TimeSlotCUAdapter(timeSlotGatewayIntPort);
+    public TimeSlotCUAdapter createTimeSlotAdapter(TimeSlotGatewayIntPort timeSlotGatewayIntPort,
+            ResultFormatterIntPort objtimeSlotAdapter) {
+        return new TimeSlotCUAdapter(timeSlotGatewayIntPort, objtimeSlotAdapter);
     }
 
     @Bean

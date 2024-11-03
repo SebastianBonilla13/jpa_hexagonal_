@@ -2,11 +2,14 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TimeSlotGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.SubjectEntity;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios.TimeSlotRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
@@ -19,8 +22,15 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
     }
 
     @Override
-    public TimeSlot saveTimeSlotGateway(TimeSlot newTimeSlot) {
+    public TimeSlot saveTimeSlot(TimeSlot newTimeSlot) {
         return null;
+    }
+
+    @Override
+    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente) {
+        Optional<TimeSlot> optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
+                idDocente);
+        return optionalSubject.isEmpty();
     }
 
     @Override

@@ -17,21 +17,32 @@ public class TimeSlotController {
     private final TimeSlotCUIntPort timeSlotService;
     private final TimeSlotDTOsMapper dtOsMapper;
 
-    public TimeSlotController(TimeSlotCUIntPort timeSlotService, TimeSlotDTOsMapper dtOsMapper){
+    public TimeSlotController(TimeSlotCUIntPort timeSlotService, TimeSlotDTOsMapper dtOsMapper) {
         this.dtOsMapper = dtOsMapper;
         this.timeSlotService = timeSlotService;
     }
 
     @PostMapping("")
-    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody TimeSlotRequestDTO timeSlotRequestDTO){
+    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody TimeSlotRequestDTO timeSlotRequestDTO) {
         TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO);
         TimeSlot savedSlot = this.timeSlotService.createTimeSlot(timeSlot);
         TimeSlotResponseDTO timeSlotResponseDTO = this.dtOsMapper.map(savedSlot);
         return new ResponseEntity<>(timeSlotResponseDTO, HttpStatus.CREATED);
     }
 
+    @PostMapping("/{idTeacher}")
+    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot2(@RequestBody TimeSlotRequestDTO timeSlotRequestDTO,
+            @PathVariable Integer idTeacher) {
+        TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO);
+
+        TimeSlot savedSlot = this.timeSlotService.createTimeSlot2(timeSlot, idTeacher);
+
+        TimeSlotResponseDTO timeSlotResponseDTO = this.dtOsMapper.map(savedSlot);
+        return new ResponseEntity<>(timeSlotResponseDTO, HttpStatus.CREATED);
+    }
+
     @GetMapping("")
-    public ResponseEntity<List<TimeSlotResponseDTO>> getAllTimeSlots(){
+    public ResponseEntity<List<TimeSlotResponseDTO>> getAllTimeSlots() {
         List<TimeSlot> timeSlots = this.timeSlotService.listTimeSlots();
         List<TimeSlotResponseDTO> timeSlotResponseDTOS = this.dtOsMapper.timeSlostToTimeSlotsResponse(timeSlots);
         return new ResponseEntity<>(timeSlotResponseDTOS, HttpStatus.OK);

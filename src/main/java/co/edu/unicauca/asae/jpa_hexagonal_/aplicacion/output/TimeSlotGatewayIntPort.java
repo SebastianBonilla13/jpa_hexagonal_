@@ -5,6 +5,10 @@ import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import java.util.List;
 
 public interface TimeSlotGatewayIntPort {
-    public TimeSlot saveTimeSlotGateway(TimeSlot newTimeSlot);
+    public TimeSlot saveTimeSlot(TimeSlot newTimeSlot);
+
     public List<TimeSlot> findAllTimeSlots();
+
+    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente);
+
 }
