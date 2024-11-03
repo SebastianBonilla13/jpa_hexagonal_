@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.ResultFormatterIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.OfficeGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.GestionarLocationCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.OfficeCUAdapter;
@@ -26,7 +26,7 @@ public class BeanConfiguration {
     @Bean
     public GestionarLocationCUAdapter crearGestionLocationCUInt(
             GestionarLocationGatewayIntPort objGestionarLocationGateway,
-            LocationFormateadorResultadosIntPort objLocationFormateadorResultados) {
+            ResultFormatterIntPort objLocationFormateadorResultados) {
         GestionarLocationCUAdapter Adapter = new GestionarLocationCUAdapter(objGestionarLocationGateway,
                 objLocationFormateadorResultados);
 
@@ -45,8 +45,9 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway) {
-        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway);
+    public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway,
+            ResultFormatterIntPort objFormatterAdapter) {
+        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway, objFormatterAdapter);
         return AdapterTeacher;
     }
 
@@ -60,22 +61,5 @@ public class BeanConfiguration {
     public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort) {
         return new CourseCUAdapter(courseGatewayIntPort);
     }
-
-    /*
-     * @Bean
-     * public Location location1() {
-     * return new Location(null, "Auditorio 1", 20, null);
-     * }
-     * 
-     * @Bean
-     * public Location location2() {
-     * return new Location(null, "Salón de Conferencias", 50, null);
-     * }
-     * 
-     * @Bean
-     * public Location location3() {
-     * return new Location(null, "Sala de Reuniones", 10, null);
-     * }
-     */
 
 }

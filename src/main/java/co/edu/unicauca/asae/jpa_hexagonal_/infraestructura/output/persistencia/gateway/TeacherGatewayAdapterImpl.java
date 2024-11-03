@@ -25,8 +25,7 @@ public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
 
     @Override
     public boolean teacherExists(Integer teacherId) {
-        if (teacherId == null)
-            return false;
+        /* if (teacherId == null) return false; */
         Optional<TeacherEntity> optionalTeacher = teacherRepository.findById(teacherId);
         return optionalTeacher.isEmpty();
     }
@@ -36,6 +35,12 @@ public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
         TeacherEntity teacher = this.mapper.map(newTeacher, TeacherEntity.class);
         TeacherEntity savedTeacher = teacherRepository.save(teacher);
         return this.mapper.map(savedTeacher, Teacher.class);
+    }
+
+    @Override
+    public boolean findByEmail(String teacherEmail) {
+        Optional<TeacherEntity> optionalTeacher = teacherRepository.findByEmail(teacherEmail);
+        return optionalTeacher.isEmpty();
     }
 
     @Override
