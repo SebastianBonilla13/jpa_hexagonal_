@@ -10,7 +10,6 @@ import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExc
 import java.util.List;
 
 public class CourseCUAdapter implements CourseCUIntPort {
-
     private final CourseGatewayIntPort courseGateway;
 
     public CourseCUAdapter(CourseGatewayIntPort courseGateway){

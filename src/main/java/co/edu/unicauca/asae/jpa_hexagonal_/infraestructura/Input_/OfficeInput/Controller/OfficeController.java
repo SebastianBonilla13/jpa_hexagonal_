@@ -20,14 +20,14 @@ import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.OfficeInput.Re
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/office")
 @RequiredArgsConstructor
 public class OfficeController {
 
     private final OfficeCUIntPort officeService;
     private final OfficeDTOsMapper officeMapper;
 
-    @PostMapping("/office")
+    @PostMapping("")
     public ResponseEntity<OfficeResponseDTO> postOffice(@RequestBody @Valid OfficeRequestDTO officeRequest) {
         Office office = this.officeMapper.requestOfficeToResponseOffice(officeRequest);
         Office savedOffice = this.officeService.createOffice(office);
@@ -36,11 +36,11 @@ public class OfficeController {
         return officeResponse;
     }
 
-    @GetMapping("/office")
+    @GetMapping("")
     public ResponseEntity<List<OfficeResponseDTO>> listOffice() {
-        ResponseEntity<List<OfficeResponseDTO>> officeResponse = new ResponseEntity<List<OfficeResponseDTO>>(
-                officeMapper.officeListResponsesOfficeList(this.officeService.getAllOffices()), HttpStatus.CREATED);
-        return officeResponse;
+        List<Office> officeList = this.officeService.getAllOffices();
+        List<OfficeResponseDTO> officeResponseDTOS = this.officeMapper.officeModelsToOfficeRequestDTOList(officeList);
+        return new ResponseEntity<>(officeResponseDTOS, HttpStatus.OK);
     }
 
 }

@@ -3,6 +3,11 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.
 import java.util.List;
 import java.util.Optional;
 
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.CourseEntity;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.OfficeEntity;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios.OfficeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.modelmapper.TypeToken;
@@ -16,10 +21,12 @@ import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.r
 public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
 
     private final TeacherRepository teacherRepository;
+    private final OfficeRepository officeRepository;
     private final ModelMapper mapper;
 
-    public TeacherGatewayAdapterImpl(TeacherRepository teacherRepository, ModelMapper mapper) {
+    public TeacherGatewayAdapterImpl(TeacherRepository teacherRepository, ModelMapper mapper, OfficeRepository officeRepository) {
         this.teacherRepository = teacherRepository;
+        this.officeRepository = officeRepository;
         this.mapper = mapper;
     }
 
@@ -49,6 +56,39 @@ public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
         List<Teacher> teachers = this.mapper.map(teacherEntities, new TypeToken<List<Teacher>>() {
         }.getType());
         return teachers;
+    }
+
+    @Override
+    public Teacher updateTeacherOffice(Integer teacherId, Integer officeId) {
+        Optional<OfficeEntity> office = this.officeRepository.findById(officeId);
+        if(office.isEmpty()) return null;
+
+        Optional<TeacherEntity> teacher = this.teacherRepository.findById(teacherId);
+        if(teacher.isEmpty()) return null;
+
+        //Actualizar la oficina del docente & guardarlo en la base de datos actualizado
+        teacher.get().setOffice(office.get());
+        TeacherEntity savedTeacher = this.teacherRepository.save(teacher.get());
+
+        Teacher teacherModel = this.mapper.map(savedTeacher, Teacher.class);
+        return teacherModel;
+    }
+
+    @Override
+    public List<Course> findAllCoursesByTeacherGateway(Integer teacherId) {
+        return this.teacherRepository.findAllCoursesById(teacherId);
+    }
+
+    @Override
+    public Teacher updateTeacherCoursesGateway(Integer teacherId, List<Course> courses) {
+        Optional<TeacherEntity> teacher = this.teacherRepository.findById(teacherId);
+        if(teacher.isEmpty()) return null;
+
+        TeacherEntity teacherEntity = teacher.get();
+        List<CourseEntity> courseEntities = this.mapper.map(courses, new TypeToken<List<CourseEntity>>(){}.getType());
+        teacherEntity.setCourses(courseEntities);
+
+        return this.mapper.map(this.teacherRepository.save(teacherEntity), Teacher.class);
     }
 
 }

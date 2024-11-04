@@ -1,12 +1,8 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
-import javax.persistence.*;
-import lombok.Data;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 

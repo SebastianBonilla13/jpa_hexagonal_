@@ -1,8 +1,6 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalTime;

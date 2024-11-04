@@ -16,5 +16,5 @@ public interface OfficeDTOsMapper {
 
     OfficeResponseDTO officeDataResponseOffice(Office office);
 
-    List<OfficeResponseDTO> officeListResponsesOfficeList(List<Office> officeList);
+    List<OfficeResponseDTO> officeModelsToOfficeRequestDTOList(List<Office> officeList);
 }

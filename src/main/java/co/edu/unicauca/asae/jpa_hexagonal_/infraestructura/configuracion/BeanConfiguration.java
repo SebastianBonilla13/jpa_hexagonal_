@@ -46,8 +46,8 @@ public class BeanConfiguration {
 
     @Bean
     public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway,
-            ResultFormatterIntPort objFormatterAdapter) {
-        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway, objFormatterAdapter);
+            ResultFormatterIntPort objFormatterAdapter, CourseCUIntPort courseCUIntPort) {
+        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway, objFormatterAdapter, courseCUIntPort);
         return AdapterTeacher;
     }
 

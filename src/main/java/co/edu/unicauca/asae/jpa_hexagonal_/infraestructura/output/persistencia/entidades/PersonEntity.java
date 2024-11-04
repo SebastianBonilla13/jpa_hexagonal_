@@ -1,7 +1,8 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
-import javax.persistence.*;
 import lombok.*;
+
+import jakarta.persistence.*;
 
 @Entity
 @Data

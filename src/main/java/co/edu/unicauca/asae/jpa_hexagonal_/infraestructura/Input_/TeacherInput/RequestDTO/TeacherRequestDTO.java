@@ -15,7 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeacherRequestDTO {
-
     @NotBlank(message = "{generic.not_empty}")
     @NotNull(message = "{generic.not_null}")
     @Size(min = 2, max = 50, message = "{teacher.name.length}")
