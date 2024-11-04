@@ -1,8 +1,7 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

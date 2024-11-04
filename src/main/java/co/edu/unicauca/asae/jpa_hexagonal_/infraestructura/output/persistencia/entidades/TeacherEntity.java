@@ -2,7 +2,7 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

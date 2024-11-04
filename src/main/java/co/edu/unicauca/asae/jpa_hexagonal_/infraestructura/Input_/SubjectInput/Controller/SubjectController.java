@@ -14,18 +14,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/subject")
+
 public class SubjectController {
 
     private final SubjectCUIntPort subjectService;
     private final SubjectDTOsMapper subjectMapper;
 
-    public SubjectController(SubjectCUIntPort subjectService, SubjectDTOsMapper subjectMapper){
+    public SubjectController(SubjectCUIntPort subjectService, SubjectDTOsMapper subjectMapper) {
         this.subjectMapper = subjectMapper;
         this.subjectService = subjectService;
     }
 
     @PostMapping("")
-    public ResponseEntity<SubjectResponseDTO> postSubject(@RequestBody @Valid SubjectRequestDTO subjectRequest){
+    public ResponseEntity<SubjectResponseDTO> postSubject(@RequestBody @Valid SubjectRequestDTO subjectRequest) {
         Subject subject = this.subjectMapper.requestSubjectToResponseSubject(subjectRequest);
         Subject savedSubject = this.subjectService.createSubject(subject);
         SubjectResponseDTO subjectResponse = this.subjectMapper.subjectDataToResponseSubject(savedSubject);
@@ -33,10 +34,9 @@ public class SubjectController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<SubjectResponseDTO>> listSubjects(){
+    public ResponseEntity<List<SubjectResponseDTO>> listSubjects() {
         List<Subject> subjects = this.subjectService.getAllSubjects();
         List<SubjectResponseDTO> subjectsResponse = this.subjectMapper.subjectListToResponsesSubjectList(subjects);
         return new ResponseEntity<>(subjectsResponse, HttpStatus.CREATED);
     }
 }
-

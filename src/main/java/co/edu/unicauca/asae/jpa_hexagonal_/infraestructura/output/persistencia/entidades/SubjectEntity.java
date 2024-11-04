@@ -1,11 +1,10 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 import java.util.List;
-
 
 @Entity
 @Data
