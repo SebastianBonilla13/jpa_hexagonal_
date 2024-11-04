@@ -7,8 +7,14 @@ import java.util.List;
 
 public interface TimeSlotGatewayIntPort {
     public TimeSlot saveTimeSlotGateway(TimeSlot newTimeSlot);
+
     public List<TimeSlot> findAllTimeSlots();
+
     public List<TimeSlot> findTimeSlotsByLocationAndDay(Location location, String day);
+
     public boolean isTimeSlotOverlaped(List<TimeSlot> timeSlotList, TimeSlot newTimeSlot);
+
     public TimeSlot findTimeSlotByIdGateway(Integer timeSlotId);
+
+    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente);
 }
