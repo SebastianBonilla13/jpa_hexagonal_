@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.modelmapper.TypeToken;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.OfficeGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.OfficeGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.OfficeEntity;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios.OfficeRepository;

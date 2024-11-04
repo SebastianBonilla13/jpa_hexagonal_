@@ -3,7 +3,7 @@ package co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso;
 import java.util.List;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.TeacherCUIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TeacherGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.TeacherGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Teacher;
 
 public class TeacherCUAdapter implements TeacherCUIntPort {

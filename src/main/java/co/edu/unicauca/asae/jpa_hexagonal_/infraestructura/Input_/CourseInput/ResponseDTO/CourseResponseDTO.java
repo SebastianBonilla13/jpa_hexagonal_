@@ -19,5 +19,4 @@ public class CourseResponseDTO {
     private Integer id;
     private String name;
     private SubjectResponseDTO subject;
-    private List<TimeSlotResponseDTO> timeSlots;
 }

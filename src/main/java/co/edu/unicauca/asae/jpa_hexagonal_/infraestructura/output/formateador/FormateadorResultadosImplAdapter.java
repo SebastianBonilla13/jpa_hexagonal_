@@ -2,7 +2,7 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.formateador;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.resultFormatters.LocationFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 

@@ -7,4 +7,5 @@ import java.util.List;
 public interface SubjectCUIntPort {
     public Subject createSubject(Subject newSubject);
     public List<Subject> getAllSubjects();
+    public Subject getSubjectById(Integer subjectId);
 }

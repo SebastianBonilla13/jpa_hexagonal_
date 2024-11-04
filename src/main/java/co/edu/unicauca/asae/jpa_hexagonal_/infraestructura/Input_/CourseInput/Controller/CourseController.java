@@ -1,6 +1,10 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.CourseInput.Controller;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.TimeSlotCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.SubjectCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TimeSlotCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.CourseInput.Mapper.CourseDTOsMapper;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.CourseInput.RequestDTO.CourseRequestDTO;
@@ -16,15 +20,19 @@ import java.util.List;
 public class CourseController {
     private final CourseCUIntPort courseService;
     private final CourseDTOsMapper dtOsMapper;
+    private final TimeSlotCUIntPort timeSlotCUAdapter;
+    private final SubjectCUIntPort subjectCUAdapter;
 
-    public CourseController(CourseCUIntPort courseService, CourseDTOsMapper dtOsMapper){
+    public CourseController(CourseCUIntPort courseService, CourseDTOsMapper dtOsMapper, TimeSlotCUIntPort timeSlotCUAdapter, SubjectCUIntPort subjectCUAdapter){
         this.courseService = courseService;
         this.dtOsMapper = dtOsMapper;
+        this.timeSlotCUAdapter = timeSlotCUAdapter;
+        this.subjectCUAdapter = subjectCUAdapter;
     }
 
     @PostMapping("")
     public ResponseEntity<CourseResponseDTO> postCourse(@RequestBody CourseRequestDTO courseRequestDTO){
-        Course course = this.dtOsMapper.courseRequestToCourseModel(courseRequestDTO);
+        Course course = this.dtOsMapper.courseRequestToCourseModel(courseRequestDTO, subjectCUAdapter, timeSlotCUAdapter );
         Course savedCourse = this.courseService.createCourse(course);
         CourseResponseDTO courseResponseDTO = this.dtOsMapper.courseDataToCourseResponse(savedCourse);
         return new ResponseEntity<>(courseResponseDTO, HttpStatus.CREATED);

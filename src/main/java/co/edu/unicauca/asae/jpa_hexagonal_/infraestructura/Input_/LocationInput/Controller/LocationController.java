@@ -1,6 +1,6 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.LocationInput.Controller;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.GestionarLocationCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.LocationCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.LocationInput.Mapper.LocationDTOsMapper;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.LocationInput.RequestDTO.LocationRequestDTO;
@@ -14,13 +14,13 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/location")
 @RequiredArgsConstructor
 public class LocationController {
-    private final GestionarLocationCUIntPort objGestionarLocateCUInt;
+    private final LocationCUIntPort objGestionarLocateCUInt;
     private final LocationDTOsMapper objMapeador;
 
-    @PostMapping("/locations")
+    @PostMapping("")
     public ResponseEntity<LocationResponseDTO> create(@RequestBody @Valid LocationRequestDTO objLocation) {
         Location objLocationCrear = objMapeador.mappearDePeticionALocation(objLocation); // Peticion to objLocation
         Location objLocationCreado = objGestionarLocateCUInt.crear(objLocationCrear); // crear objLocation en Dominio
@@ -29,7 +29,7 @@ public class LocationController {
         return objRespuesta;
     }
 
-    @GetMapping("/locations")
+    @GetMapping("")
     public ResponseEntity<List<LocationResponseDTO>> listar() {
         ResponseEntity<List<LocationResponseDTO>> objRespuesta = new ResponseEntity<List<LocationResponseDTO>>(
                 objMapeador.mappearDeLocationsARespuesta(this.objGestionarLocateCUInt.listar()),

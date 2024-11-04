@@ -17,15 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CourseRequestDTO {
-
     @NotBlank(message = "{generic.not_empty}")
     @NotNull(message = "{generic.not_null}")
     @Size(min = 1, max = 100)
     private String name;
 
-    @NotBlank(message = "{generic.not_empty}")
     @NotNull(message = "{generic.not_null}")
-    private Subject subject;
+    private Integer subjectId;
 
-    private List<TimeSlot> timeSlots;
+    private List<Integer> timeSlotIds;
 }

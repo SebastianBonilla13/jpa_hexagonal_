@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output;
+package co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Subject;
 
@@ -8,4 +8,5 @@ public interface SubjectGatewayIntPort {
     public boolean subjectExists(Integer subjectId);
     public Subject saveSubject(Subject newSubject);
     public List<Subject> listAllSubjects();
+    public Subject findSubjectByIdGateway(Integer subjectId);
 }

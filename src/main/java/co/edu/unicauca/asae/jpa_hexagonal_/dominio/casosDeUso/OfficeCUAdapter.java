@@ -3,7 +3,7 @@ package co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso;
 import java.util.List;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.OfficeCUIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.OfficeGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.OfficeGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
 
 public class OfficeCUAdapter implements OfficeCUIntPort {

@@ -1,10 +1,10 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.configuracion;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TeacherGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.TimeSlotGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.CourseGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.SubjectGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.TeacherGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.TimeSlotGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.CourseCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.SubjectCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TeacherCUAdapter;
@@ -13,21 +13,20 @@ import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.TimeSlotCUAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.GestionarLocationGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.LocationFormateadorResultadosIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.OfficeGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.GestionarLocationCUAdapter;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.LocationGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.resultFormatters.LocationFormateadorResultadosIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.OfficeGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.LocationCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.OfficeCUAdapter;
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 
 @Configuration
 public class BeanConfiguration {
 
     @Bean
-    public GestionarLocationCUAdapter crearGestionLocationCUInt(
-            GestionarLocationGatewayIntPort objGestionarLocationGateway,
+    public LocationCUAdapter crearGestionLocationCUInt(
+            LocationGatewayIntPort objGestionarLocationGateway,
             LocationFormateadorResultadosIntPort objLocationFormateadorResultados) {
-        GestionarLocationCUAdapter Adapter = new GestionarLocationCUAdapter(objGestionarLocationGateway,
+        LocationCUAdapter Adapter = new LocationCUAdapter(objGestionarLocationGateway,
                 objLocationFormateadorResultados);
 
         return Adapter;

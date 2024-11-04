@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output;
+package co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.resultFormatters;
 
 public interface LocationFormateadorResultadosIntPort {
 

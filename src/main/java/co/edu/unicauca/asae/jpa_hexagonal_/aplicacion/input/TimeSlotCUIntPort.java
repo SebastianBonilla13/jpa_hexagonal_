@@ -7,4 +7,5 @@ import java.util.List;
 public interface TimeSlotCUIntPort {
     public TimeSlot createTimeSlot(TimeSlot newTimeSlot);
     public List<TimeSlot> listTimeSlots();
+    public TimeSlot getTimeSlotById(Integer timeSlotId);
 }

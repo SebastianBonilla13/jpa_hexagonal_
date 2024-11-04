@@ -1,9 +1,10 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.SubjectCUIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.SubjectGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.SubjectGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Subject;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
@@ -33,5 +34,12 @@ public class SubjectCUAdapter implements SubjectCUIntPort {
         if(subjects.isEmpty()) throw new ReglaNegocioExcepcion("No tiene materias registradas");
 
         return subjects;
+    }
+
+    @Override
+    public Subject getSubjectById(Integer subjectId) {
+        Subject subject = this.subjectGateway.findSubjectByIdGateway(subjectId);
+        if(subject == null) throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
+        return subject;
     }
 }

@@ -1,6 +1,6 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.gateway;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.CourseGatewayIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.CourseEntity;
@@ -53,5 +53,12 @@ public class CourseGatewayAdapterImpl implements CourseGatewayIntPort {
         List<CourseEntity> courseEntities = this.courseRepository.findAll();
         List<Course> courses = this.mapper.map(courseEntities, new TypeToken<List<Course>>(){}.getType());
         return courses;
+    }
+
+    @Override
+    public Course findCourseByIdGateway(Integer courseId) {
+        Optional<CourseEntity> courseEntity = this.courseRepository.findById(courseId);
+        if(courseEntity.isEmpty()) return null;
+        return this.mapper.map(courseEntity.get(), Course.class);
     }
 }
