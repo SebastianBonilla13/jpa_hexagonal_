@@ -1,7 +1,7 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso;
 
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.ResultFormatterIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.LocationGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.resultFormatters.LocationFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.LocationCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
@@ -11,10 +11,10 @@ import java.util.List;
 
 public class LocationCUAdapter implements LocationCUIntPort { // Acciones a la APP
     private final LocationGatewayIntPort objGestionarLocationGateway;
-    private final LocationFormateadorResultadosIntPort objLocationFormateadorResultados;
+    private final ResultFormatterIntPort objLocationFormateadorResultados;
 
     public LocationCUAdapter(LocationGatewayIntPort objGestionarLocationGateway,
-                             LocationFormateadorResultadosIntPort objLocationFormateadorResultados) {
+            ResultFormatterIntPort objLocationFormateadorResultados) {
         this.objGestionarLocationGateway = objGestionarLocationGateway;
         this.objLocationFormateadorResultados = objLocationFormateadorResultados;
     }
@@ -23,8 +23,9 @@ public class LocationCUAdapter implements LocationCUIntPort { // Acciones a la A
     public Location crear(Location objLocation) { // guarda en repositorio
         Location objLocationCreado = null;
 
-        if(this.objGestionarLocationGateway.existeLocationPorCodigo(objLocation.getId().toString())) {
-            this.objLocationFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error, ya se encuentra en el sistema una Espacio Fisico con el código");
+        if (this.objGestionarLocationGateway.existeLocationPorCodigo(objLocation.getId().toString())) {
+            this.objLocationFormateadorResultados.returnResponseErrorEntityExists(
+                    "Error, ya se encuentra en el sistema una Espacio Fisico con el código");
         } else {
             objLocationCreado = this.objGestionarLocationGateway.guardar(objLocation);
         }
@@ -42,7 +43,8 @@ public class LocationCUAdapter implements LocationCUIntPort { // Acciones a la A
     @Override
     public Location getLocationById(Integer locationId) {
         Location location = this.objGestionarLocationGateway.finLocationByIdGateway(locationId);
-        if(location == null) throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
+        if (location == null)
+            throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
         return location;
     }
 

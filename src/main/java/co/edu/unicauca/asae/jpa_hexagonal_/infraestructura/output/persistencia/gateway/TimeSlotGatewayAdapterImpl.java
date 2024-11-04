@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,17 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
     }
 
     @Override
+    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente) {
+        Optional<TimeSlot> optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
+                idDocente);
+        return optionalSubject.isEmpty();
+    }
+
+    @Override
     public List<TimeSlot> findAllTimeSlots() {
         List<TimeSlotEntity> timeSlotEntities = this.timeSlotRepository.findAll();
-        return this.mapper.map(timeSlotEntities, new TypeToken<List<TimeSlot>>(){}.getType());
+        return this.mapper.map(timeSlotEntities, new TypeToken<List<TimeSlot>>() {
+        }.getType());
     }
 
     @Override
@@ -48,7 +57,8 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
     @Override
     public TimeSlot findTimeSlotByIdGateway(Integer timeSlotId) {
         Optional<TimeSlotEntity> timeSlotEntity = this.timeSlotRepository.findById(timeSlotId);
-        if(timeSlotEntity.isEmpty()) return null;
+        if (timeSlotEntity.isEmpty())
+            return null;
         return this.mapper.map(timeSlotEntity, TimeSlot.class);
     }
 }

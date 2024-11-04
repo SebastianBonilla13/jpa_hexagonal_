@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.configuracion;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.CourseCUIntPort;
+import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.ResultFormatterIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.CourseGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.SubjectGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.TeacherGatewayIntPort;
@@ -14,7 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.LocationGatewayIntPort;
-import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.resultFormatters.LocationFormateadorResultadosIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.OfficeGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.LocationCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.OfficeCUAdapter;
@@ -25,7 +25,7 @@ public class BeanConfiguration {
     @Bean
     public LocationCUAdapter crearGestionLocationCUInt(
             LocationGatewayIntPort objGestionarLocationGateway,
-            LocationFormateadorResultadosIntPort objLocationFormateadorResultados) {
+            ResultFormatterIntPort objLocationFormateadorResultados) {
         LocationCUAdapter Adapter = new LocationCUAdapter(objGestionarLocationGateway,
                 objLocationFormateadorResultados);
 
@@ -33,8 +33,9 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public TimeSlotCUAdapter createTimeSlotAdapter(TimeSlotGatewayIntPort timeSlotGatewayIntPort) {
-        return new TimeSlotCUAdapter(timeSlotGatewayIntPort);
+    public TimeSlotCUAdapter createTimeSlotAdapter(TimeSlotGatewayIntPort timeSlotGatewayIntPort,
+            ResultFormatterIntPort objtimeSlotAdapter) {
+        return new TimeSlotCUAdapter(timeSlotGatewayIntPort, objtimeSlotAdapter);
     }
 
     @Bean
@@ -44,8 +45,9 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway) {
-        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway);
+    public TeacherCUAdapter createTeacherCUAdapter(TeacherGatewayIntPort objtTacherGateway,
+            ResultFormatterIntPort objFormatterAdapter) {
+        TeacherCUAdapter AdapterTeacher = new TeacherCUAdapter(objtTacherGateway, objFormatterAdapter);
         return AdapterTeacher;
     }
 
@@ -59,22 +61,5 @@ public class BeanConfiguration {
     public CourseCUIntPort createCourseCUIntPort(CourseGatewayIntPort courseGatewayIntPort) {
         return new CourseCUAdapter(courseGatewayIntPort);
     }
-
-    /*
-     * @Bean
-     * public Location location1() {
-     * return new Location(null, "Auditorio 1", 20, null);
-     * }
-     * 
-     * @Bean
-     * public Location location2() {
-     * return new Location(null, "Salón de Conferencias", 50, null);
-     * }
-     * 
-     * @Bean
-     * public Location location3() {
-     * return new Location(null, "Sala de Reuniones", 10, null);
-     * }
-     */
 
 }

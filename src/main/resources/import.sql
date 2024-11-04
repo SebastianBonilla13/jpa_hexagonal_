@@ -4,8 +4,7 @@
 
 --INSERT INTO `docente`(`oficina_id`, `apellido`, `correo`, `nombre`) VALUES (NULL,'Masso','Jhon','jmasso@unicauca.edu.co');
 
---INSERT INTO `docente` (`correo`, `apellido`, `nombre`, `oficina_id`, `id`)
---VALUES ('jmasso@unicauca.edu.co', 'Masso', 'Jhon', NULL, NULL);
+--INSERT INTO `docente` (`correo`, `apellido`, `nombre`, `oficina_id`, `id`) VALUES ('jmasso@unicauca.edu.co', 'Masso', 'Jhon', NULL, NULL);
 
 
 --INSERT INTO `docente` (`id`, `correo`, `apellido`, `nombre`) VALUES (NULL, 'jmasso@unicauca.edu.co', 'Masso', 'Jhon');
