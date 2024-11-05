@@ -17,8 +17,7 @@ public class FormateadorResultadosImplAdapter implements ResultFormatterIntPort 
 
     @Override
     public void returnResponseErrorBusinessRule(String mensaje) {
-        ReglaNegocioExcepcion objException = new ReglaNegocioExcepcion(mensaje);
-        throw objException;
+        throw new ReglaNegocioExcepcion(mensaje);
     }
 
 }
