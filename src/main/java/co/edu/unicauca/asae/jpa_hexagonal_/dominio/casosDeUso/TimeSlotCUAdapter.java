@@ -7,6 +7,7 @@ import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 
+import java.time.LocalTime;
 import java.util.List;
 
 public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
@@ -41,6 +42,7 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
         return timeSlot;
     }
 
+
     @Override
     public TimeSlot createTimeSlot2(TimeSlot newTimeSlot, Integer idTeacher) {
         TimeSlot objCreateTimeSlot = null;
@@ -54,6 +56,11 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
         }
 
         return objCreateTimeSlot;
+    }
+
+    @Override
+    public boolean isTimeSlotAvailable(String day, LocalTime startTime, LocalTime endTime, Integer locationId) {
+        return this.timeSlotGateway.isTimeSlotAvailableGateway(day, startTime, endTime, locationId);
     }
 
 }

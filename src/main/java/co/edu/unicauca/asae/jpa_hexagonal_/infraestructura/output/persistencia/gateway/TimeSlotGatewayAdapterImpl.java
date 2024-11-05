@@ -10,6 +10,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,11 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
         Optional<TimeSlot> optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
                 idDocente);
         return optionalSubject.isEmpty();
+    }
+
+    @Override
+    public boolean isTimeSlotAvailableGateway(String day, LocalTime startTime, LocalTime endTime, Integer locationId) {
+        return this.timeSlotRepository.timeSlotAvailability(day, startTime, endTime, locationId);
     }
 
     @Override

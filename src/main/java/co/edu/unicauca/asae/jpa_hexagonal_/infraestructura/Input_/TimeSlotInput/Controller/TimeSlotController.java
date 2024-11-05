@@ -6,6 +6,7 @@ import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.TimeSlotCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.casosDeUso.CourseCUAdapter;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.Mapper.TimeSlotDTOsMapper;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.RequestDTO.TimeSlotCheck;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.RequestDTO.TimeSlotRequestDTO;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.ResponseDTO.TimeSlotResponseDTO;
 import org.springframework.http.HttpStatus;
@@ -56,5 +57,12 @@ public class TimeSlotController {
         List<TimeSlot> timeSlots = this.timeSlotService.listTimeSlots();
         List<TimeSlotResponseDTO> timeSlotResponseDTOS = this.dtOsMapper.timeSlostToTimeSlotsResponse(timeSlots);
         return new ResponseEntity<>(timeSlotResponseDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/timeSlotAvailability")
+    public ResponseEntity<String> timeSlotAvailability(@RequestBody TimeSlotCheck timeSlotCheck){
+        boolean available = this.timeSlotService.isTimeSlotAvailable(timeSlotCheck.day(), timeSlotCheck.startTime(), timeSlotCheck.endTime(), timeSlotCheck.locationId());
+        String response = available ? "Fanja horaria disponible " + timeSlotCheck.toString() : "La franja hora ria no está disponible";
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
