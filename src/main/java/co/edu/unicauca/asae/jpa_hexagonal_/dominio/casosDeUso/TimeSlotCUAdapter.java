@@ -6,6 +6,7 @@ import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.Ti
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -22,10 +23,8 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
 
     @Override
     public TimeSlot createTimeSlot(TimeSlot newTimeSlot) {
-        // *
-        // VALIDAR SI LA FRANJA HORARIA NO SE SOLAPA CON OTRA
-        // USAR FUNCIONES DEL GATEWAY
-        // *//
+        boolean isTiemSlotavailable = this.timeSlotGateway.isTimeSlotAvailableGateway(newTimeSlot.getDay(), newTimeSlot.getStartTime(), newTimeSlot.getEndTime(), newTimeSlot.getLocation().getId());
+        if(!isTiemSlotavailable) throw new ReglaNegocioExcepcion("La franja horaria que desea crear ya esta ocupada");
         return this.timeSlotGateway.saveTimeSlotGateway(newTimeSlot);
     }
 
