@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Office;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,7 @@ public class TeacherRequestDTO {
 
     @Email(message = "{generic.email.format}")
     private String email;
+
+    private Office office;
 
 }

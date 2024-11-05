@@ -11,6 +11,7 @@ import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Teacher;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.OfficeEntity;
 
 public class TeacherCUAdapter implements TeacherCUIntPort {
     private final TeacherGatewayIntPort teacherGateway;

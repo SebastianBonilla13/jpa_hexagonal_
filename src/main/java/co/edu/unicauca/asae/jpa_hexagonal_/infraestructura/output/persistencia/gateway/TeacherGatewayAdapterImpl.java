@@ -47,8 +47,11 @@ public class TeacherGatewayAdapterImpl implements TeacherGatewayIntPort {
 
     @Override
     public Teacher saveTeacher(Teacher newTeacher) {
-        TeacherEntity teacher = this.mapper.map(newTeacher, TeacherEntity.class);
-        TeacherEntity savedTeacher = teacherRepository.save(teacher);
+        List<CourseEntity> courseEntities = new ArrayList<>();
+        OfficeEntity officeEntity = this.mapper.map(newTeacher.getOffice(), OfficeEntity.class);
+        TeacherEntity teacherEntity = new TeacherEntity(newTeacher.getName(), newTeacher.getLastname(),
+                newTeacher.getEmail(), officeEntity, courseEntities);
+        TeacherEntity savedTeacher = teacherRepository.save(teacherEntity);
         return this.mapper.map(savedTeacher, Teacher.class);
     }
 
