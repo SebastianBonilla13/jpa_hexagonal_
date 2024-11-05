@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios;
 
+import java.time.LocalTime;
 import java.util.Optional;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
@@ -30,4 +31,22 @@ public interface TimeSlotRepository extends JpaRepository<TimeSlotEntity, Intege
       @Param("horaInicio") String horaInicio,
       @Param("horaFin") String horaFin,
       @Param("idDocente") Integer idDocente);
+
+  @Query("""
+  SELECT CASE WHEN COUNT(ts) > 0 THEN true ELSE false END
+  FROM TimeSlotEntity ts
+  JOIN ts.location loc
+  WHERE loc.id = :locationId
+    AND ts.day = :day
+    AND (
+          (ts.endTime <= :startTime) OR
+          (ts.startTime >= :endTime)
+        )
+  """)
+  boolean timeSlotAvailability(
+          @Param("day") String day,
+          @Param("startTime") LocalTime startTime,
+          @Param("endTime") LocalTime endTime,
+          @Param("locationId") Integer locationId);
+
 }

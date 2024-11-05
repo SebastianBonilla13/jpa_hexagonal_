@@ -3,6 +3,7 @@ package co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 
+import java.time.LocalTime;
 import java.util.List;
 
 public interface TimeSlotGatewayIntPort {
@@ -17,4 +18,5 @@ public interface TimeSlotGatewayIntPort {
     public TimeSlot findTimeSlotByIdGateway(Integer timeSlotId);
 
     public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente);
+    public boolean isTimeSlotAvailableGateway(String day, LocalTime startTime, LocalTime endTime, Integer locationId);
 }
