@@ -62,9 +62,11 @@ public class TimeSlotController {
     }
 
     @GetMapping("/timeSlotAvailability")
-    public ResponseEntity<String> timeSlotAvailability(@RequestBody TimeSlotCheck timeSlotCheck){
-        boolean available = this.timeSlotService.isTimeSlotAvailable(timeSlotCheck.day(), timeSlotCheck.startTime(), timeSlotCheck.endTime(), timeSlotCheck.locationId());
-        String response = available ? "Fanja horaria disponible " + timeSlotCheck.toString() : "La franja hora ria no está disponible";
+    public ResponseEntity<String> timeSlotAvailability(@RequestBody TimeSlotCheck timeSlotCheck) {
+        boolean available = this.timeSlotService.isTimeSlotAvailable(timeSlotCheck.getDay(),
+                timeSlotCheck.getStartTime(), timeSlotCheck.getEndTime(), timeSlotCheck.getLocationId());
+        String response = available ? "Fanja horaria disponible " + timeSlotCheck.toString()
+                : "La franja hora ria no está disponible";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

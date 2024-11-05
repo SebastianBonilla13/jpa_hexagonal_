@@ -2,5 +2,18 @@ package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput
 
 import java.time.LocalTime;
 
-public record TimeSlotCheck(String day, LocalTime startTime, LocalTime endTime, Integer locationId) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TimeSlotCheck {
+    private String day;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private Integer locationId;
 }
