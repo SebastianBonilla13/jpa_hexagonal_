@@ -17,6 +17,7 @@ public interface TimeSlotGatewayIntPort {
 
     public TimeSlot findTimeSlotByIdGateway(Integer timeSlotId);
 
-    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente);
+    public boolean checkTeacherAvailability(String dia, LocalTime horaInicio, LocalTime horaFin, Integer idDocente);
+
     public boolean isTimeSlotAvailableGateway(String day, LocalTime startTime, LocalTime endTime, Integer locationId);
 }

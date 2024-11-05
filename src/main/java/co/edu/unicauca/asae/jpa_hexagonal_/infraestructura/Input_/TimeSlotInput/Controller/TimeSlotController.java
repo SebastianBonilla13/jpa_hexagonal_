@@ -33,23 +33,12 @@ public class TimeSlotController {
         this.courseCUIntPort = courseCUIntPort;
     }
 
-    @PostMapping("")
-    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody @Valid TimeSlotRequestDTO timeSlotRequestDTO) {
-        TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO, courseCUIntPort,
-                locationCUIntPort);
-        TimeSlot savedSlot = this.timeSlotService.createTimeSlot(timeSlot);
-        TimeSlotResponseDTO timeSlotResponseDTO = this.dtOsMapper.map(savedSlot);
-        return new ResponseEntity<>(timeSlotResponseDTO, HttpStatus.CREATED);
-    }
-
     @PostMapping("/{idTeacher}")
-    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot2(@RequestBody @Valid TimeSlotRequestDTO timeSlotRequestDTO,
+    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody @Valid TimeSlotRequestDTO timeSlotRequestDTO,
             @PathVariable Integer idTeacher) {
         TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO, courseCUIntPort,
                 locationCUIntPort);
-
-        TimeSlot savedSlot = this.timeSlotService.createTimeSlot2(timeSlot, idTeacher);
-
+        TimeSlot savedSlot = this.timeSlotService.createTimeSlot(timeSlot, idTeacher);
         TimeSlotResponseDTO timeSlotResponseDTO = this.dtOsMapper.map(savedSlot);
         return new ResponseEntity<>(timeSlotResponseDTO, HttpStatus.CREATED);
     }

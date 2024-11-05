@@ -32,13 +32,6 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
     }
 
     @Override
-    public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente) {
-        Integer optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
-                idDocente);
-        return optionalSubject != null && optionalSubject > 0;
-    }
-
-    @Override
     public boolean isTimeSlotAvailableGateway(String day, LocalTime startTime, LocalTime endTime, Integer locationId) {
         return this.timeSlotRepository.timeSlotAvailability(day, startTime, endTime, locationId);
     }
@@ -66,5 +59,11 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
         if (timeSlotEntity.isEmpty())
             return null;
         return this.mapper.map(timeSlotEntity, TimeSlot.class);
+    }
+
+    @Override
+    public boolean checkTeacherAvailability(String dia, LocalTime horaInicio, LocalTime horaFin, Integer idDocente) {
+        Integer result = this.timeSlotRepository.isTeacherAvailableAtTimeSlot(dia, horaInicio, horaFin, idDocente);
+        return result > 0 ? false : true;
     }
 }

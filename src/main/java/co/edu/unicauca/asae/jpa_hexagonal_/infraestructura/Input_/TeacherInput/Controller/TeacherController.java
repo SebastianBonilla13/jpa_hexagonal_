@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.input.TeacherCUIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Teacher;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TeacherInput.Mapper.TeacherDTOsMapper;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TeacherInput.RequestDTO.TeacherRequestDTO;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TeacherInput.ResponseDTO.TeacherReponseDTO;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.Mapper.TimeSlotDTOsMapper;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.ResponseDTO.TimeSlotResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,6 +26,7 @@ public class TeacherController {
 
     private final TeacherCUIntPort teacherService;
     private final TeacherDTOsMapper teacherMapper;
+    private final TimeSlotDTOsMapper timeSlotDTOsMapper;
 
     @PostMapping("")
     public ResponseEntity<TeacherReponseDTO> postTeacher(@RequestBody @Valid TeacherRequestDTO teacherRequest) {
@@ -43,13 +47,12 @@ public class TeacherController {
     }
 
     @PutMapping("/assignCourse")
-    public ResponseEntity<TeacherReponseDTO> assignCourse(@RequestParam Integer courseId, @RequestParam Integer teacherId){
+    public ResponseEntity<TeacherReponseDTO> assignCourse(@RequestParam Integer courseId,
+            @RequestParam Integer teacherId) {
         Teacher teacher = this.teacherService.assignCourseToTeacher(teacherId, courseId);
         TeacherReponseDTO teacherReponseDTO = this.teacherMapper.teacherDataResponseTeacher(teacher);
         return new ResponseEntity<>(teacherReponseDTO, HttpStatus.OK);
     }
-
-
 
     @GetMapping("")
     public ResponseEntity<List<TeacherReponseDTO>> listTeachers() {
@@ -57,6 +60,14 @@ public class TeacherController {
                 teacherMapper.teacherListResponsesTeacherList(this.teacherService.getAllTeachers()),
                 HttpStatus.CREATED);
         return teacherResponse;
+    }
+
+    @GetMapping("/timeSlots/{teacherId}")
+    public ResponseEntity<List<TimeSlotResponseDTO>> listTeacherTimeSlots(@PathVariable Integer teacherId) {
+        List<TimeSlot> timeSlots = this.teacherService.getAllTimeSlotByTeacherId(teacherId);
+        List<TimeSlotResponseDTO> timeSlotResponseDTOs = this.timeSlotDTOsMapper
+                .timeSlostToTimeSlotsResponse(timeSlots);
+        return new ResponseEntity<>(timeSlotResponseDTOs, HttpStatus.OK);
     }
 
 }

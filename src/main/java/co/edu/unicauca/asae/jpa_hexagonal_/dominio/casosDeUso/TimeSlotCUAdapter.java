@@ -22,9 +22,17 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
     }
 
     @Override
-    public TimeSlot createTimeSlot(TimeSlot newTimeSlot) {
-        boolean isTiemSlotavailable = this.timeSlotGateway.isTimeSlotAvailableGateway(newTimeSlot.getDay(), newTimeSlot.getStartTime(), newTimeSlot.getEndTime(), newTimeSlot.getLocation().getId());
-        if(!isTiemSlotavailable) throw new ReglaNegocioExcepcion("La franja horaria que desea crear ya esta ocupada");
+    public TimeSlot createTimeSlot(TimeSlot newTimeSlot, Integer idTeacher) {
+        boolean isTeacherAvailable = this.timeSlotGateway.checkTeacherAvailability(newTimeSlot.getDay(),
+                newTimeSlot.getStartTime(), newTimeSlot.getEndTime(), idTeacher);
+        if (!isTeacherAvailable)
+            throw new ReglaNegocioExcepcion("El docente se encuentra ocupado en este espacio");
+
+        boolean isTiemSlotavailable = this.timeSlotGateway.isTimeSlotAvailableGateway(newTimeSlot.getDay(),
+                newTimeSlot.getStartTime(), newTimeSlot.getEndTime(), newTimeSlot.getLocation().getId());
+        if (!isTiemSlotavailable)
+            throw new ReglaNegocioExcepcion("La franja horaria que desea crear ya esta ocupada");
+
         return this.timeSlotGateway.saveTimeSlotGateway(newTimeSlot);
     }
 
@@ -39,22 +47,6 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
         if (timeSlot == null)
             throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
         return timeSlot;
-    }
-
-
-    @Override
-    public TimeSlot createTimeSlot2(TimeSlot newTimeSlot, Integer idTeacher) {
-        TimeSlot objCreateTimeSlot = null;
-
-        if (!this.timeSlotGateway.checkTeacherAvailability(newTimeSlot.getDay(), newTimeSlot.getStartTime().toString(),
-                newTimeSlot.getEndTime().toString(), idTeacher)) {
-            this.timeSlotFormatter
-                    .returnResponseErrorBusinessRule("Error, el docente se encuentra ocupado en dicha franja horaria");
-        } else {
-            objCreateTimeSlot = this.timeSlotGateway.saveTimeSlotGateway(newTimeSlot);
-        }
-
-        return objCreateTimeSlot;
     }
 
     @Override

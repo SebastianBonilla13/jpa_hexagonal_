@@ -7,9 +7,11 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface TimeSlotCUIntPort {
-    public TimeSlot createTimeSlot(TimeSlot newTimeSlot);
-    public TimeSlot createTimeSlot2(TimeSlot newTimeSlot, Integer idTeacher);
+    public TimeSlot createTimeSlot(TimeSlot newTimeSlot, Integer idTeacher);
+
     public List<TimeSlot> listTimeSlots();
+
     public TimeSlot getTimeSlotById(Integer timeSlotId);
+
     public boolean isTimeSlotAvailable(String day, LocalTime startTime, LocalTime endTime, Integer locationId);
 }

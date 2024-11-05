@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.repositorios;
 
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
+import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.CourseEntity;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.persistencia.entidades.TeacherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,6 @@ public interface TeacherRepository extends JpaRepository<TeacherEntity, Integer>
     Optional<TeacherEntity> findByEmail(@Param("email") String email);
 
     @Query("SELECT t.courses FROM TeacherEntity t WHERE t.id = :teacherId")
-    List<Course> findAllCoursesById(@Param("teacherId") Integer teacherId);
+    List<CourseEntity> findAllCoursesById(@Param("teacherId") Integer teacherId);
 
 }

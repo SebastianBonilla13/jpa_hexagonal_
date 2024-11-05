@@ -8,6 +8,7 @@ import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.ResultFormatterIntP
 import co.edu.unicauca.asae.jpa_hexagonal_.aplicacion.output.gatewaysIntPorts.TeacherGatewayIntPort;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Course;
 import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Teacher;
+import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.TimeSlot;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 
@@ -16,7 +17,8 @@ public class TeacherCUAdapter implements TeacherCUIntPort {
     private final ResultFormatterIntPort teacherFormatter;
     private final CourseCUIntPort courseAdapter;
 
-    public TeacherCUAdapter(TeacherGatewayIntPort teacherGateway, ResultFormatterIntPort teacherFormatter, CourseCUIntPort courseAdapter) {
+    public TeacherCUAdapter(TeacherGatewayIntPort teacherGateway, ResultFormatterIntPort teacherFormatter,
+            CourseCUIntPort courseAdapter) {
         this.teacherGateway = teacherGateway;
         this.teacherFormatter = teacherFormatter;
         this.courseAdapter = courseAdapter;
@@ -46,7 +48,8 @@ public class TeacherCUAdapter implements TeacherCUIntPort {
     @Override
     public Teacher allocateTeacherIntoOffice(Integer teacherId, Integer officeId) {
         Teacher updatedTeacher = this.teacherGateway.updateTeacherOffice(teacherId, officeId);
-        if(updatedTeacher == null) throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
+        if (updatedTeacher == null)
+            throw new EntidadNoExisteException(CodigoError.ENTIDAD_NO_ENCONTRADA);
         return updatedTeacher;
     }
 
@@ -61,6 +64,11 @@ public class TeacherCUAdapter implements TeacherCUIntPort {
         List<Course> courseList = this.getAllCoursesByTeacher(teacherId);
         courseList.add(course);
         return this.teacherGateway.updateTeacherCoursesGateway(teacherId, courseList);
+    }
+
+    @Override
+    public List<TimeSlot> getAllTimeSlotByTeacherId(Integer teacherId) {
+        return this.teacherGateway.findAllTimeSlotsByTeacherIdGateway(teacherId);
     }
 
 }

@@ -54,7 +54,7 @@ public class RestApiExceptionHandler {
         }
 
         @ExceptionHandler(ReglaNegocioExcepcion.class)
-        public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+        public ResponseEntity<Error> handleReglaNegocioException(final HttpServletRequest req,
                         final ReglaNegocioExcepcion ex, final Locale locale) {
                 final Error error = ErrorUtils
                                 .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(), ex.formatException(),
