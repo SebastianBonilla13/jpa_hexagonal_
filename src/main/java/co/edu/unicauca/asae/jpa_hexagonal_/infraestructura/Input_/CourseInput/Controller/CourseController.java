@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
@@ -23,7 +25,8 @@ public class CourseController {
     private final TimeSlotCUIntPort timeSlotCUAdapter;
     private final SubjectCUIntPort subjectCUAdapter;
 
-    public CourseController(CourseCUIntPort courseService, CourseDTOsMapper dtOsMapper, TimeSlotCUIntPort timeSlotCUAdapter, SubjectCUIntPort subjectCUAdapter){
+    public CourseController(CourseCUIntPort courseService, CourseDTOsMapper dtOsMapper,
+            TimeSlotCUIntPort timeSlotCUAdapter, SubjectCUIntPort subjectCUAdapter) {
         this.courseService = courseService;
         this.dtOsMapper = dtOsMapper;
         this.timeSlotCUAdapter = timeSlotCUAdapter;
@@ -31,15 +34,16 @@ public class CourseController {
     }
 
     @PostMapping("")
-    public ResponseEntity<CourseResponseDTO> postCourse(@RequestBody CourseRequestDTO courseRequestDTO){
-        Course course = this.dtOsMapper.courseRequestToCourseModel(courseRequestDTO, subjectCUAdapter, timeSlotCUAdapter );
+    public ResponseEntity<CourseResponseDTO> postCourse(@RequestBody @Valid CourseRequestDTO courseRequestDTO) {
+        Course course = this.dtOsMapper.courseRequestToCourseModel(courseRequestDTO, subjectCUAdapter,
+                timeSlotCUAdapter);
         Course savedCourse = this.courseService.createCourse(course);
         CourseResponseDTO courseResponseDTO = this.dtOsMapper.courseDataToCourseResponse(savedCourse);
         return new ResponseEntity<>(courseResponseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("")
-    public ResponseEntity<List<CourseResponseDTO>> getAllCourses(){
+    public ResponseEntity<List<CourseResponseDTO>> getAllCourses() {
         List<Course> list = this.courseService.listCourses();
         List<CourseResponseDTO> responseDTOList = this.dtOsMapper.cousesListToCourseReponseList(list);
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);

@@ -20,6 +20,7 @@ public class OfficeRequestDTO {
     @Size(min = 2, max = 50, message = "{office.name.length}")
     private String name;
 
+    @Size(min = 2, max = 50, message = "{office.location.length}")
     private String location;
 
 }

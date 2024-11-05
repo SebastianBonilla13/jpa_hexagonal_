@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
@@ -15,21 +16,18 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class LocationRequestDTO {
-    @NotNull(message = "{location.id.empty}")
-    @PositiveOrZero(message = "{location.id.positive}")
     private Integer id;
 
-    @NotNull(message = "{location.name.empty}")
+    @NotBlank(message = "{generic.not_empty}")
+    @NotNull(message = "{generic.not_null}")
     @Size(min = 5, max = 45, message = "{location.name.length}")
     private String name;
 
-    @NotNull(message = "{location.capacity.empty}")
-    @Size(min = 1, max = 30, message = "{location.capacity.length}")
+    @NotNull(message = "{generic.not_null}")
     @PositiveOrZero(message = "{location.capacity.positive}")
+    @Max(value = 30, message = "{location.capacity.max}")
     private Integer capacity;
 
-    @Valid
-    @NotNull(message = "{location.timeSlots.empty}")
-    // @Size(min = 1, message = "{location.timeSlots.length}")
+    /* @Valid */
     private List<TimeSlot> timeSlots;
 }

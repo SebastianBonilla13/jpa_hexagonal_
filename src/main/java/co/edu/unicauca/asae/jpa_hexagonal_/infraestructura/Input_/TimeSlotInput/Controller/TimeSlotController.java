@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/timeSlot")
 public class TimeSlotController {
@@ -31,7 +33,7 @@ public class TimeSlotController {
     }
 
     @PostMapping("")
-    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody TimeSlotRequestDTO timeSlotRequestDTO) {
+    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot(@RequestBody @Valid TimeSlotRequestDTO timeSlotRequestDTO) {
         TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO, courseCUIntPort,
                 locationCUIntPort);
         TimeSlot savedSlot = this.timeSlotService.createTimeSlot(timeSlot);
@@ -40,7 +42,7 @@ public class TimeSlotController {
     }
 
     @PostMapping("/{idTeacher}")
-    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot2(@RequestBody TimeSlotRequestDTO timeSlotRequestDTO,
+    public ResponseEntity<TimeSlotResponseDTO> postTimeSlot2(@RequestBody @Valid TimeSlotRequestDTO timeSlotRequestDTO,
             @PathVariable Integer idTeacher) {
         TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(timeSlotRequestDTO, courseCUIntPort,
                 locationCUIntPort);

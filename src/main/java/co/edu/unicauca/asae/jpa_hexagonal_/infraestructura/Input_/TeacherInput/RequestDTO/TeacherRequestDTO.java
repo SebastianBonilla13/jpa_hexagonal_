@@ -23,7 +23,7 @@ public class TeacherRequestDTO {
     @Size(min = 2, max = 50, message = "{teacher.lastname.length}")
     private String lastname;
 
-    @Email(message = "generic.email.format")
+    @Email(message = "{generic.email.format}")
     private String email;
 
 }

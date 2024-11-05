@@ -1,6 +1,5 @@
 package co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.TimeSlotInput.ResponseDTO;
 
-import co.edu.unicauca.asae.jpa_hexagonal_.dominio.modelos.Location;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.CourseInput.ResponseDTO.CourseResponseDTO;
 import co.edu.unicauca.asae.jpa_hexagonal_.infraestructura.Input_.LocationInput.ResponseDTO.LocationResponseDTO;
 import lombok.AllArgsConstructor;

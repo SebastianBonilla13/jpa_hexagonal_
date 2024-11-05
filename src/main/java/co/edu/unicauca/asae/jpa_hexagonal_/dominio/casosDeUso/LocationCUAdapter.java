@@ -23,12 +23,16 @@ public class LocationCUAdapter implements LocationCUIntPort { // Acciones a la A
     public Location crear(Location objLocation) { // guarda en repositorio
         Location objLocationCreado = null;
 
-        if (this.objGestionarLocationGateway.existeLocationPorCodigo(objLocation.getId().toString())) {
-            this.objLocationFormateadorResultados.returnResponseErrorEntityExists(
-                    "Error, ya se encuentra en el sistema una Espacio Fisico con el código");
-        } else {
-            objLocationCreado = this.objGestionarLocationGateway.guardar(objLocation);
-        }
+        /*
+         * if
+         * (this.objGestionarLocationGateway.existeLocationPorCodigo(objLocation.getId()
+         * .toString())) {
+         * this.objLocationFormateadorResultados.returnResponseErrorEntityExists(
+         * "Error, ya se encuentra en el sistema una Espacio Fisico con el código");
+         * } else {
+         * objLocationCreado = this.objGestionarLocationGateway.guardar(objLocation);
+         * }
+         */
         objLocationCreado = this.objGestionarLocationGateway.guardar(objLocation);
 
         return objLocationCreado;
