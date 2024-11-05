@@ -20,4 +20,5 @@ public interface TimeSlotGatewayIntPort {
     public boolean checkTeacherAvailability(String dia, LocalTime horaInicio, LocalTime horaFin, Integer idDocente);
 
     public boolean isTimeSlotAvailableGateway(String day, LocalTime startTime, LocalTime endTime, Integer locationId);
+
 }

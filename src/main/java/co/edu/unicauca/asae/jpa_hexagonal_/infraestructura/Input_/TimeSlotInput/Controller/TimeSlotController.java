@@ -58,4 +58,17 @@ public class TimeSlotController {
                 : "La franja hora ria no está disponible";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/docenteDisponible/{teacherId}")
+    public ResponseEntity<String> docenteOcupado(@RequestBody TimeSlotRequestDTO timeSlotCheck,
+            @PathVariable Integer teacherId) {
+        TimeSlot timeSlot = this.dtOsMapper.timeSlotRequestToTimeSlotModel(
+                timeSlotCheck, courseCUIntPort,
+                locationCUIntPort);
+        boolean available = this.timeSlotService.isTeacherAvailable(timeSlot, teacherId);
+        String response = available ? "El profesor esta disponible en esta franja horaria"
+                : "El profesor NO se encuentra disponible";
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
 }

@@ -54,4 +54,11 @@ public class TimeSlotCUAdapter implements TimeSlotCUIntPort {
         return this.timeSlotGateway.isTimeSlotAvailableGateway(day, startTime, endTime, locationId);
     }
 
+    @Override
+    public boolean isTeacherAvailable(TimeSlot timeSlot, Integer teacherId) {
+        boolean isTeacherAvailable = this.timeSlotGateway.checkTeacherAvailability(timeSlot.getDay(),
+                timeSlot.getStartTime(), timeSlot.getEndTime(), teacherId);
+        return isTeacherAvailable;
+    }
+
 }

@@ -14,4 +14,6 @@ public interface TimeSlotCUIntPort {
     public TimeSlot getTimeSlotById(Integer timeSlotId);
 
     public boolean isTimeSlotAvailable(String day, LocalTime startTime, LocalTime endTime, Integer locationId);
+
+    public boolean isTeacherAvailable(TimeSlot timeSlot, Integer teacherId);
 }
