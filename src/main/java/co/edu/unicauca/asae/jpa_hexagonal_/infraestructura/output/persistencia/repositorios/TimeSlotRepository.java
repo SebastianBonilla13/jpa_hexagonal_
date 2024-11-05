@@ -26,27 +26,27 @@ public interface TimeSlotRepository extends JpaRepository<TimeSlotEntity, Intege
               (f.hora_inicio >= :horaInicio AND f.hora_fin <= :horaFin)
             )
       """, nativeQuery = true)
-  Optional<TimeSlot> checkTeacherAvailability(
+  Integer checkTeacherAvailability(
       @Param("dia") String dia,
       @Param("horaInicio") String horaInicio,
       @Param("horaFin") String horaFin,
       @Param("idDocente") Integer idDocente);
 
   @Query("""
-  SELECT CASE WHEN COUNT(ts) > 0 THEN true ELSE false END
-  FROM TimeSlotEntity ts
-  JOIN ts.location loc
-  WHERE loc.id = :locationId
-    AND ts.day = :day
-    AND (
-          (ts.endTime <= :startTime) OR
-          (ts.startTime >= :endTime)
-        )
-  """)
+      SELECT CASE WHEN COUNT(ts) > 0 THEN true ELSE false END
+      FROM TimeSlotEntity ts
+      JOIN ts.location loc
+      WHERE loc.id = :locationId
+        AND ts.day = :day
+        AND (
+              (ts.endTime <= :startTime) OR
+              (ts.startTime >= :endTime)
+            )
+      """)
   boolean timeSlotAvailability(
-          @Param("day") String day,
-          @Param("startTime") LocalTime startTime,
-          @Param("endTime") LocalTime endTime,
-          @Param("locationId") Integer locationId);
+      @Param("day") String day,
+      @Param("startTime") LocalTime startTime,
+      @Param("endTime") LocalTime endTime,
+      @Param("locationId") Integer locationId);
 
 }

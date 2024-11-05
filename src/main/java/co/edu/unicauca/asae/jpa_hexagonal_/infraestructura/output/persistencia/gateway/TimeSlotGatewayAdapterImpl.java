@@ -33,9 +33,9 @@ public class TimeSlotGatewayAdapterImpl implements TimeSlotGatewayIntPort {
 
     @Override
     public boolean checkTeacherAvailability(String dia, String horaInicio, String horaFin, Integer idDocente) {
-        Optional<TimeSlot> optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
+        Integer optionalSubject = timeSlotRepository.checkTeacherAvailability(dia, horaInicio, horaFin,
                 idDocente);
-        return optionalSubject.isEmpty();
+        return optionalSubject != null && optionalSubject > 0;
     }
 
     @Override

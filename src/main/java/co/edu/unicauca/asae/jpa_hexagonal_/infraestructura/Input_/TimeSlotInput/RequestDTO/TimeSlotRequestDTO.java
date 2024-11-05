@@ -28,9 +28,9 @@ public class TimeSlotRequestDTO {
     @NotNull(message = "{generic.not_null}")
     private LocalTime endTime;
 
-    @NotNull(message = "{generic.not_null}")
+    /* @NotNull(message = "{generic.not_null}") */
     private Integer courseId;
 
-    @NotNull(message = "{generic.not_null}")
+    /* @NotNull(message = "{generic.not_null}") */
     private Integer locationId;
 }
