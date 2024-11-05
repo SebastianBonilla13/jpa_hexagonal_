@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface LocationCUIntPort { // Acciones a la APP (impl. Dominio)
     public Location crear(Location objLocation);
-    public List<Location> listar();
+
+    public List<Location> listar(String pattern, Integer capacity);
+
     public Location getLocationById(Integer locationId);
 }

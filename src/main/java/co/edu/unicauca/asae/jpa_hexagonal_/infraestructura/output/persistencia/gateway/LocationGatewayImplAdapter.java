@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.modelmapper.TypeToken;
 
@@ -18,7 +19,7 @@ public class LocationGatewayImplAdapter implements LocationGatewayIntPort {
     private final ModelMapper LocationModelMapper;
 
     public LocationGatewayImplAdapter(LocationRepository objLocationRepository,
-                                      ModelMapper locationModelMapper) {
+            ModelMapper locationModelMapper) {
         this.objLocationRepository = objLocationRepository;
         LocationModelMapper = locationModelMapper;
     }
@@ -37,8 +38,10 @@ public class LocationGatewayImplAdapter implements LocationGatewayIntPort {
     }
 
     @Override
-    public List<Location> listar() {
-        Iterable<LocationEntity> lista = this.objLocationRepository.findAll();
+    public List<Location> listar(String pattern, Integer capacity) {
+        Integer capacityCheck = capacity == null ? 0 : capacity;
+        String patternCheck = pattern == null ? "" : pattern;
+        Iterable<LocationEntity> lista = this.objLocationRepository.findAllLocationsCustom(patternCheck, capacityCheck);
         List<Location> listaObtenida = this.LocationModelMapper.map(lista, new TypeToken<List<Location>>() {
         }.getType());
         return listaObtenida;
@@ -47,7 +50,8 @@ public class LocationGatewayImplAdapter implements LocationGatewayIntPort {
     @Override
     public Location finLocationByIdGateway(Integer locationId) {
         Optional<LocationEntity> locationEntity = this.objLocationRepository.findById(locationId);
-        if (locationEntity.isEmpty()) return null;
+        if (locationEntity.isEmpty())
+            return null;
         return this.LocationModelMapper.map(locationEntity.get(), Location.class);
     }
 

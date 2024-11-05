@@ -30,11 +30,11 @@ public class LocationController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<LocationResponseDTO>> listar() {
-        ResponseEntity<List<LocationResponseDTO>> objRespuesta = new ResponseEntity<List<LocationResponseDTO>>(
-                objMapeador.mappearDeLocationsARespuesta(this.objGestionarLocateCUInt.listar()),
-                HttpStatus.CREATED);
-        return objRespuesta;
+    public ResponseEntity<List<LocationResponseDTO>> listar(@RequestParam(required = false) String pattern,
+            @RequestParam(required = false) Integer capacity) {
+        List<Location> locations = this.objGestionarLocateCUInt.listar(pattern, capacity);
+        List<LocationResponseDTO> locationResponseDTOs = this.objMapeador.mappearDeLocationsARespuesta(locations);
+        return new ResponseEntity<>(locationResponseDTOs, HttpStatus.OK);
     }
 
 }

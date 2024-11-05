@@ -39,8 +39,8 @@ public class LocationCUAdapter implements LocationCUIntPort { // Acciones a la A
     }
 
     @Override
-    public List<Location> listar() {
-        List<Location> listaLocations = objGestionarLocationGateway.listar();
+    public List<Location> listar(String pattern, Integer capacity) {
+        List<Location> listaLocations = objGestionarLocationGateway.listar(pattern, capacity);
         return listaLocations;
     }
 
