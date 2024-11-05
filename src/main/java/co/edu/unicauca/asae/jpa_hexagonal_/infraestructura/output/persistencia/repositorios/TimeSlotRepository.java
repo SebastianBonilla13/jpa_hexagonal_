@@ -33,15 +33,17 @@ public interface TimeSlotRepository extends JpaRepository<TimeSlotEntity, Intege
       @Param("idDocente") Integer idDocente);
 
   @Query("""
-  SELECT CASE WHEN COUNT(ts) > 0 THEN true ELSE false END
+  SELECT CASE WHEN COUNT(ts) = 0 THEN true ELSE false END
   FROM TimeSlotEntity ts
-  JOIN ts.location loc
+  JOIN ts.location loc ON ts.location.id = loc.id
   WHERE loc.id = :locationId
     AND ts.day = :day
     AND (
-          (ts.endTime <= :startTime) OR
-          (ts.startTime >= :endTime)
-        )
+          (:startTime BETWEEN ts.startTime AND ts.endTime) OR
+          (:endTime BETWEEN ts.startTime AND ts.endTime) AND
+          (ts.startTime BETWEEN :startTime AND :endTime) OR
+          (ts.endTime BETWEEN :startTime AND :endTime)
+    )
   """)
   boolean timeSlotAvailability(
           @Param("day") String day,
